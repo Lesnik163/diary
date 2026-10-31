@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Мои записи{% endblock %}
+
+{% block content %}
+<h1>Мои записи</h1>
+<a href="{{ url_for('card', id=1) }}">Карточка 1</a>
+<a href="{{ url_for('create') }}">Создать</a>
+{% endblock %}
