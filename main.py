@@ -1,7 +1,7 @@
 from flask import Flask, render_template,request, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user
-from models import db, Users
+from models import db, Users, Cards
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///diary.db'
@@ -50,10 +50,7 @@ def logout():
 @app.route('/')
 @login_required
 def index():
-  cards = [
-        {'id': 1, 'title': 'День 1', 'subtitle': 'Проба пера'},
-        {'id': 2, 'title': 'День 2', 'subtitle': 'Финал'},
-    ]
+  cards = db.session.scalars(db.select(Cards)).all()
   return render_template('index.html', cards=cards)
 
 @app.route('/home')
@@ -63,7 +60,8 @@ def home():
 @app.route('/card/<int:id>')
 @login_required
 def card(id):
-  return render_template('card.html', id=id)
+  entry = db.session.get(Cards, id)
+  return render_template('card.html', card=entry)
 
 @app.route('/create')
 @login_required
@@ -73,6 +71,13 @@ def create():
 @app.route('/form_create', methods=['GET','POST'])
 @login_required
 def form_create():
+  if request.method == "POST":
+    title = request.form.get('title')
+    subtitle = request.form.get('subtitle')
+    text = request.form.get('text')
+    card = Cards(title=title, subtitle=subtitle, text=text)
+    db.session.add(card)
+    db.session.commit()
   return redirect(url_for('index'))
 
 if __name__ == "__main__":

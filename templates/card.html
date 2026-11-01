@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Карточка {{ id }}{% endblock %}
+{% block title %}{{ card.title }}{% endblock %}
 
 {% block content %}
-<p>Карточка {{ id }}</p>
+<h1>{{ card.title }}</h1>
+<p>{{ card.subtitle }}</p>
+<p>{{ card.text }}</p>
 <a href="{{ url_for('index') }}">На главную</a>
 {% endblock %}
