@@ -4,7 +4,12 @@
 
 {% block content %}
 <h1>Мои записи</h1>
-<a href="{{ url_for('card', id=1) }}">Карточка 1</a>
+{% for card in cards %}
+<a href="{{ url_for('card', id=card.id) }}">
+  {{ card.title }}
+  {{ card.subtitle }}
+</a>
+{% endfor %}
 <a href="{{ url_for('create') }}">Создать</a>
 <a href="{{ url_for('logout') }}">Выйти</a>
 {% endblock %}

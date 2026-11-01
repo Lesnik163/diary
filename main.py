@@ -50,7 +50,11 @@ def logout():
 @app.route('/')
 @login_required
 def index():
-  return render_template('index.html')
+  cards = [
+        {'id': 1, 'title': 'День 1', 'subtitle': 'Проба пера'},
+        {'id': 2, 'title': 'День 2', 'subtitle': 'Финал'},
+    ]
+  return render_template('index.html', cards=cards)
 
 @app.route('/home')
 def home():
@@ -69,7 +73,7 @@ def create():
 @app.route('/form_create', methods=['GET','POST'])
 @login_required
 def form_create():
-  pass
+  return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.secret_key = 'lol'
