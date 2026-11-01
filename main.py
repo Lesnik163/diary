@@ -1,15 +1,17 @@
 from flask import Flask, render_template,request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager, UserMixin, login_required, login_user, current_user, logout_user
+from flask_login import LoginManager, login_required, login_user, current_user, logout_user
+from models import db, Users
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///diary.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+
+db.init_app(app)
 login_manager = LoginManager(app)
 
-
+with app.app_context():
+  db.create_all()
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -18,21 +20,35 @@ def load_user(user_id):
 @app.route('/register', methods=["GET", "POST"])
 def register():
   if request.method == "POST":
+    login = request.form.get('login')
+    password = request.form.get('password')
+    user = Users(login=login, password=generate_password_hash(password))
+    db.session.add(user)
+    db.session.commit()
+
     return redirect(url_for('login'))
   return render_template('register.html')
  
 @app.route("/login/", methods=["GET", "POST"])
 def login():
   if request.method == "POST":
+    login_name = request.form.get('login')
+    password = request.form.get('password')
+    user = db.session.scalar(db.select(Users).where(Users.login == login_name))
+    if user and check_password_hash(user.password, password):
+      login_user(user)
+      return redirect(url_for('index'))
     return redirect(url_for('home'))
   return render_template('login.html')
 
 @app.route('/logout/')
 @login_required
 def logout():
-  pass
+  logout_user()
+  return redirect(url_for('login'))
 
 @app.route('/')
+@login_required
 def index():
   return render_template('index.html')
 
