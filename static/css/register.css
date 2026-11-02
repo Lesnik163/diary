@@ -1,0 +1,17 @@
+.page-register .shell {
+  padding-top: 48px;
+}
+
+.page-register form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-register .field {
+  margin-bottom: 16px;
+}
+
+.page-register .btn-line {
+  margin-top: 18px;
+}

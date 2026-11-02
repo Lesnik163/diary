@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 
+{% block body_class %}page-card{% endblock %}
 {% block title %}{{ card.title }}{% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
+{% endblock %}
+
 {% block content %}
-<h1>{{ card.title }}</h1>
-<p>{{ card.subtitle }}</p>
-<p>{{ card.text }}</p>
-<a href="{{ url_for('index') }}">На главную</a>
+<h1 class="entry-title">{{ card.title }}</h1>
+<p class="entry-sub">{{ card.subtitle }}</p>
+<p class="entry-text">{{ card.text }}</p>
+<a class="back-link" href="{{ url_for('index') }}">На главную</a>
 {% endblock %}

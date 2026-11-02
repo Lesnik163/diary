@@ -1,0 +1,97 @@
+.page-index .shell {
+  width: min(760px, calc(100% - 32px));
+  padding: 22px 22px 26px;
+}
+
+.board-title {
+  margin: 0 0 18px;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 230px;
+  border-radius: 10px;
+  background: #10192b;
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.note:hover {
+  color: #fff;
+  background: #152033;
+}
+
+.note-icon {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 8px 8px;
+}
+
+.note-body {
+  border-top: 1px solid #243049;
+  padding: 12px 8px 16px;
+  text-align: center;
+}
+
+.note-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.note-sub {
+  color: #aeb6c6;
+  font-size: 14px;
+}
+
+.note-add {
+  position: relative;
+  color: transparent;
+  font-size: 0;
+}
+
+.note-add::before,
+.note-add::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #2ec5ff;
+  border-radius: 2px;
+}
+
+.note-add::before {
+  width: 112px;
+  height: 3px;
+  transform: translate(-50%, -50%);
+}
+
+.note-add::after {
+  width: 3px;
+  height: 112px;
+  transform: translate(-50%, -50%);
+}
+
+.bulb {
+  width: 92px;
+  height: 92px;
+}
+
+.leave {
+  display: block;
+  margin-top: 16px;
+  color: #8b95a8;
+  text-align: right;
+  text-decoration: none;
+}
+
+.leave:hover {
+  color: #d5dbe8;
+}

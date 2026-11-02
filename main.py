@@ -22,7 +22,7 @@ def register():
   if request.method == "POST":
     login = request.form.get('login')
     password = request.form.get('password')
-    user = Users(login=login, password=generate_password_hash(password))
+    user = Users(username=login, password=generate_password_hash(password))
     db.session.add(user)
     db.session.commit()
 
@@ -34,7 +34,7 @@ def login():
   if request.method == "POST":
     login_name = request.form.get('login')
     password = request.form.get('password')
-    user = db.session.scalar(db.select(Users).where(Users.login == login_name))
+    user = db.session.scalar(db.select(Users).where(Users.username == login_name))
     if user and check_password_hash(user.password, password):
       login_user(user)
       return redirect(url_for('index'))

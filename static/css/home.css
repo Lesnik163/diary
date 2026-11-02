@@ -1,0 +1,8 @@
+.page-home .shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
