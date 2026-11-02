@@ -1,6 +1,6 @@
-from flask import Flask, render_template,request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager, login_required, login_user, current_user, logout_user
+from flask_login import LoginManager, login_required, login_user, logout_user
 from models import db, Users, Cards
 
 app = Flask(__name__)
