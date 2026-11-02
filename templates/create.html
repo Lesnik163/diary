@@ -1,13 +1,19 @@
 {% extends "base.html" %}
 
+{% block body_class %}page-create{% endblock %}
 {% block title %}Создание{% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}">
+{% endblock %}
+
 {% block content %}
+{% include "_bulb.html" %}
 <form method="POST" action="{{ url_for('form_create') }}">
-  <input type="text" name="title" placeholder="Введите заголовок">
-  <input type="text" name="subtitle" placeholder="Введите подзаголовок">
-  <textarea name="text" placeholder="Напишите что-нибудь..."></textarea>
-  <button type="submit">Создать</button>
+  <input class="field" type="text" name="title" placeholder="Введите заголовок">
+  <input class="field" type="text" name="subtitle" placeholder="Введите подзаголовок">
+  <textarea class="field" name="text" placeholder="Напишите что-нибудь..."></textarea>
+  <button class="btn-line" type="submit">Создать</button>
 </form>
-<a href="{{ url_for('index') }}">На главную</a>
+<a class="back-link" href="{{ url_for('index') }}">На главную</a>
 {% endblock %}

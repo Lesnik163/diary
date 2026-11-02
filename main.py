@@ -1,6 +1,6 @@
-from flask import Flask, render_template,request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager, login_required, login_user, current_user, logout_user
+from flask_login import LoginManager, login_required, login_user, logout_user
 from models import db, Users, Cards
 
 app = Flask(__name__)
@@ -22,7 +22,7 @@ def register():
   if request.method == "POST":
     login = request.form.get('login')
     password = request.form.get('password')
-    user = Users(login=login, password=generate_password_hash(password))
+    user = Users(username=login, password=generate_password_hash(password))
     db.session.add(user)
     db.session.commit()
 
@@ -34,7 +34,7 @@ def login():
   if request.method == "POST":
     login_name = request.form.get('login')
     password = request.form.get('password')
-    user = db.session.scalar(db.select(Users).where(Users.login == login_name))
+    user = db.session.scalar(db.select(Users).where(Users.username == login_name))
     if user and check_password_hash(user.password, password):
       login_user(user)
       return redirect(url_for('index'))

@@ -1,0 +1,16 @@
+.page-card .entry-title {
+  margin: 8px 0 6px;
+  font-size: 28px;
+  text-align: center;
+}
+
+.page-card .entry-sub {
+  margin-bottom: 18px;
+  color: #aeb6c6;
+  text-align: center;
+}
+
+.page-card .entry-text {
+  min-height: 80px;
+  white-space: pre-wrap;
+}

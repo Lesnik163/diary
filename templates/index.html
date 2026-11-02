@@ -1,15 +1,29 @@
 {% extends "base.html" %}
 
+{% block body_class %}page-index{% endblock %}
 {% block title %}Мои записи{% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
 {% block content %}
-<h1>Мои записи</h1>
-{% for card in cards %}
-<a href="{{ url_for('card', id=card.id) }}">
-  {{ card.title }}
-  {{ card.subtitle }}
-</a>
-{% endfor %}
-<a href="{{ url_for('create') }}">Создать</a>
-<a href="{{ url_for('logout') }}">Выйти</a>
+<h1 class="board-title">Мои записи</h1>
+<div class="row g-3 mx-0">
+  {% for card in cards %}
+  <div class="col-12 col-md-4">
+    <a class="note" href="{{ url_for('card', id=card.id) }}">
+      <div class="note-icon">{% include "_bulb.html" %}</div>
+      <div class="note-body">
+        <div class="note-title">{{ card.title }}</div>
+        <div class="note-sub">{{ card.subtitle }}</div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+  <div class="col-12 col-md-4">
+    <a class="note note-add" href="{{ url_for('create') }}" aria-label="Создать">+</a>
+  </div>
+</div>
+<a class="leave" href="{{ url_for('logout') }}">Выйти</a>
 {% endblock %}
